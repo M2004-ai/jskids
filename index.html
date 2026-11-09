@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مغامرة جافاسكريبت للأطفال</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8e7;--ink:#2b2d6e;--card:#fff;--line:#ffd98a;--code:#1e1b4b;--codeink:#e8e6ff;--acc:#ff6b6b;--sun:#ffc93c;--mint:#2bb673;--out:#eefcf5;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17163a;--ink:#f3f0ff;--card:#23225a;--line:#4b48a3;--code:#0e0d2a;--out:#143a35}}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.8 "Baloo Bhaijaan 2",Tahoma,sans-serif}
+.bar{position:sticky;top:0;z-index:5;background:var(--ink);color:#fff8e7;display:flex;justify-content:space-between;align-items:center;padding:8px 16px;font-weight:600}
+.bar a{color:inherit;text-decoration:none;margin-inline-start:10px;font-size:15px}
+main{max-width:760px;margin:0 auto;padding:16px}
+.hero{text-align:center;padding:28px 8px}
+.hero h1{font-size:clamp(34px,9vw,60px);line-height:1.2;margin:0;font-weight:800}
+.hero .dots span{display:inline-block;width:26px;height:26px;border-radius:50%;margin:0 4px;animation:b 1.6s ease-in-out infinite}
+@keyframes b{50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.hero .dots span{animation:none}}
+section{background:var(--card);border:3px solid var(--line);border-radius:22px;padding:18px 20px;margin:22px 0}
+h2{margin:0 0 6px;font-size:28px;font-weight:800}
+h2 i{font-style:normal;background:var(--sun);color:#2b2d6e;border-radius:50%;width:44px;height:44px;display:inline-grid;place-items:center;margin-inline-end:8px;font-size:24px}
+code{background:var(--line);color:var(--ink);padding:0 6px;border-radius:6px;direction:ltr;unicode-bidi:isolate;font-size:16px}
+.ed{margin:12px 0}
+textarea{width:100%;direction:ltr;text-align:left;background:var(--code);color:var(--codeink);border:0;border-radius:14px;padding:12px;font:15px/1.6 ui-monospace,Menlo,Consolas,monospace;resize:vertical;min-height:90px}
+button{font:inherit;font-weight:600;border:0;border-radius:12px;padding:4px 16px;cursor:pointer;background:var(--mint);color:#fff;margin:6px 0}
+button.done{background:var(--acc)}button:disabled{opacity:.6}
+button:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.out{background:var(--out);border-radius:14px;padding:8px 12px;min-height:44px;direction:ltr;text-align:left;font-size:17px;word-break:break-word}
+.out:empty::before{content:"النتيجة هتظهر هنا ✨";color:#888;direction:rtl;display:block;text-align:right}
+.dot{display:inline-block;border-radius:50%;margin:2px;vertical-align:middle}
+.ch{border:3px dashed var(--acc);border-radius:18px;padding:10px 14px;margin-top:18px}
+details{margin:4px 0}summary{cursor:pointer;font-weight:600}
+pre{direction:ltr;text-align:left;background:var(--code);color:var(--codeink);padding:10px;border-radius:12px;overflow-x:auto;margin:6px 0;font-size:15px}
+.tip{background:var(--line);border-radius:14px;padding:8px 14px;margin:10px 0}
+.quiz{border:3px solid var(--mint);border-radius:18px;padding:10px 14px;margin-top:18px}
+.q{margin:14px 0}.q p{margin:0 0 4px}
+.opt{display:block;width:100%;text-align:right;background:var(--line);color:var(--ink);margin:4px 0}
+.opt.ok{background:var(--mint);color:#fff}.opt.no{background:var(--acc);color:#fff}
+.exp{font-size:16px;min-height:4px}
+.out{white-space:pre-wrap}
+.proj{border:3px solid var(--sun);border-radius:18px;padding:10px 14px;margin-top:18px}
+.by{font-weight:600;font-size:20px;margin:6px 0}
+body.tv main>*,body.tv .bar{display:none}
+body.tv main>#teacher{display:block}
+.gate{position:fixed;inset:0;z-index:20;background:rgba(20,20,60,.88);place-items:center;padding:16px}
+.gate>div{background:var(--card);border-radius:22px;padding:20px;text-align:center;max-width:420px;width:100%}
+.gate input{font:inherit;padding:6px 12px;border-radius:12px;border:3px solid var(--line);width:100%;background:var(--bg);color:var(--ink);margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="bar"><span>⭐ نجومك: <b id="stars">0</b> / 18</span><span><a href="#c1">١</a><a href="#c2">٢</a><a href="#c3">٣</a><a href="#c4">٤</a><a href="#c5">٥</a><a href="#c6">٦</a><a href="#exam">🎓</a></span></div>
+<main>
+<div class="hero">
+<div class="dots"><span style="background:#ff6b6b"></span><span style="background:#ffc93c;animation-delay:.2s"></span><span style="background:#2bb673;animation-delay:.4s"></span><span style="background:#4cc9f0;animation-delay:.6s"></span></div>
+<h1>مغامرة جافاسكريبت</h1>
+<p class="by">✍️ إعداد: ماجده رضا اللبان</p>
+<p>كتاب للأبطال الصغيرين. كل الأكواد هنا بتشتغل بجد: غيّر فيها واضغط <b>شغّل</b> وشوف اللي بيحصل! 🚀</p>
+</div>
+
+<div id="gate" class="gate" style="display:none"><div><h2>👋 أهلًا بك أيها البطل!</h2><p>اكتب اسمك لنبدأ المغامرة، وستُحفَظ نقاطك وحلولك تلقائيًا.</p><input id="nm" maxlength="30" placeholder="اسمك هنا" autocomplete="off"><button id="go">ابدأ المغامرة 🚀</button></div></div>
+<p id="note" hidden class="tip"></p>
+<section id="me" hidden><h2>🏅 لوحتي</h2><div id="meBox"></div></section>
+<section id="teacher" hidden><h2>👩‍🏫 لوحة المعلمة</h2><p>تظهر هنا أسماء الطلاب ونقاطهم وحلولهم، مرتّبين من الأعلى نقاطًا.</p><p><a href="#">← صفحة الطلاب</a></p><div id="tBox">جارٍ التحميل…</div></section>
+
+<section id="c1">
+<h2><i>1</i>أول كلمة للكمبيوتر</h2>
+<p>الكمبيوتر زي روبوت مطيع: بينفذ أي أمر نكتبهوله. وأمر الكلام اسمه <code>console.log</code>. اللي بنكتبه بين علامتي التنصيص بيتطبع.</p>
+<div class="ed"><textarea rows="3">console.log("أهلاً يا عالم! 👋");
+console.log("أنا بتعلم برمجة 😎");</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<div class="tip">💡 كل سطر بينتهي بـ <code>;</code> زي النقطة في آخر الجملة.</div>
+<div class="ch"><b>🏆 التحدي:</b> خلّي الروبوت يطبع اسمك، وسنك، وأكلتك المفضلة (٣ سطور).
+<div class="ed"><textarea rows="4">// اكتب كودك هنا
+</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<details><summary>💡 تلميح</summary>كرر <code>console.log("...")</code> ثلاث مرات، وغيّر الكلام اللي جواه.</details>
+<details><summary>🔑 الحل</summary><pre>console.log("اسمي سلمى");
+console.log("عمري 9 سنين");
+console.log("باحب البيتزا 🍕");</pre></details>
+<button class="done">خلصت التحدي ⭐</button></div>
+<div class="proj"><b>🛠️ مشروع الفصل: بطاقة البطل</b>
+<div class="ed"><textarea rows="8">console.log('╔══════════════════╗');
+console.log('║   بطاقة البطل    ║');
+console.log('╠══════════════════╣');
+console.log('║ الاسم: سلمى 😎');
+console.log('║ السن: 9 سنين');
+console.log('║ الهواية: الرسم 🎨');
+console.log('╚══════════════════╝');</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+🎯 مهمتك: غيّر البيانات لبياناتك، وزوّد سطر "حلمي".<br><button class="done">خلصت المشروع ⭐</button></div>
+</section>
+
+<section id="c2">
+<h2><i>2</i>الصناديق السحرية (المتغيرات)</h2>
+<p>المتغير صندوق عليه اسم، وجواه حاجة. بنعمله بكلمة <code>let</code>.</p>
+<div class="ed"><textarea rows="5">let name = "سارة";
+let age = 9;
+let emoji = "🦄";
+console.log(name);
+console.log(age);
+console.log(emoji);</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p>لاحظ: النص بين تنصيص <code>"..."</code>، والأرقام من غير تنصيص. وتقدر تغيّر محتوى الصندوق في أي وقت: <code>age = 10;</code></p>
+<div class="ch"><b>🏆 التحدي:</b> اعمل صندوق اسمه <code>color</code> فيه لونك المفضل بالإنجليزي (مثلاً <code>"gold"</code>) وارسم بيه دايرة بالأمر <code>circle(color, 60)</code>.
+<div class="ed"><textarea rows="4">let color = "";
+circle(color, 60);</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<details><summary>💡 تلميح</summary>اكتب اسم لون زي <code>"red"</code> أو <code>"hotpink"</code> بين التنصيص.</details>
+<details><summary>🔑 الحل</summary><pre>let color = "hotpink";
+circle(color, 60);</pre></details>
+<button class="done">خلصت التحدي ⭐</button></div>
+<div class="proj"><b>🛠️ مشروع الفصل: بطاقة الحيوان الأليف</b>
+<div class="ed"><textarea rows="10">let petName = 'بيسة';
+let animal = '🐱';
+let petAge = 2;
+let food = 'السمك';
+console.log(animal + ' اسمه ' + petName);
+console.log('عمره ' + petAge + ' سنة');
+petAge = petAge + 1;
+console.log('السنة الجاية هيبقى عمره ' + petAge);
+console.log('بيحب ' + food + ' 🐟');</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+🎯 مهمتك: اعمل صندوق جديد للوزن <code>weight</code> واطبعه، وغيّر الحيوان لحيوانك.<br><button class="done">خلصت المشروع ⭐</button></div>
+</section>
+
+<section id="c3">
+<h2><i>3</i>الكمبيوتر بيحسب!</h2>
+<p>الجمع <code>+</code> والطرح <code>-</code> والضرب <code>*</code> والقسمة <code>/</code>. وكمان نقدر ندمج الصناديق جوه الكلام بعلامة الباك-تيك ومعاها <code>${ }</code>:</p>
+<div class="ed"><textarea rows="6">let apples = 5;
+let friends = 3;
+console.log(apples * friends);
+console.log(100 / 4);
+console.log(`عندي ${apples} تفاحات 🍎 و ${friends} أصحاب`);</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<div class="ch"><b>🏆 التحدي:</b> الآيس كريم بـ 5 جنيه، وأنت اشتريت 4. اعمل متغيرين <code>price</code> و <code>count</code>، واطبع جملة فيها الإجمالي.
+<div class="ed"><textarea rows="5">let price = 5;
+let count = 4;
+</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<details><summary>💡 تلميح</summary>جوه الجملة اكتب <code>${price * count}</code>.</details>
+<details><summary>🔑 الحل</summary><pre>console.log(`الحساب ${price * count} جنيه 🍦`);</pre></details>
+<button class="done">خلصت التحدي ⭐</button></div>
+<div class="proj"><b>🛠️ مشروع الفصل: فاتورة المطعم</b>
+<div class="ed"><textarea rows="11">let pizza = 80;
+let juice = 15;
+let pizzaCount = 2;
+let juiceCount = 3;
+let total = pizza * pizzaCount + juice * juiceCount;
+let service = total * 0.1;
+console.log('🍕 بيتزا: ' + pizza * pizzaCount);
+console.log('🥤 عصير: ' + juice * juiceCount);
+console.log('🧾 الخدمة 10%: ' + service);
+console.log(`💰 الإجمالي: ${total + service} جنيه`);</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+🎯 مهمتك: زوّد حلوى بسعرها وعددها، وحدّث الإجمالي.<br><button class="done">خلصت المشروع ⭐</button></div>
+</section>
+
+<section id="c4">
+<h2><i>4</i>لو ... يبقى (if / else)</h2>
+<p>الكمبيوتر بياخد قرارات! بنقوله: <b>لو</b> الشرط صح اعمل كذا، <b>وإلا</b> اعمل حاجة تانية. بنقارن بـ <code>&gt;</code> أكبر، <code>&lt;</code> أصغر، <code>===</code> يساوي.</p>
+<div class="ed"><textarea rows="8">let height = 130;
+if (height >= 120) {
+  console.log("تقدر تركب الأفعوانية! 🎢");
+} else {
+  console.log("لسه شوية، كمل أكل خضار 🥦");
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p>جرب تغيّر <code>130</code> لـ <code>100</code>.</p>
+<div class="ch"><b>🏆 التحدي:</b> اعمل متغير <code>temperature</code>. لو أكبر من 30 اطبع "الجو حر، اشرب ميه 🥤" وإلا اطبع "الجو جميل، يلا نلعب ⚽".
+<div class="ed"><textarea rows="7">let temperature = 35;
+</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<details><summary>💡 تلميح</summary>استخدم <code>if (temperature &gt; 30) { ... } else { ... }</code></details>
+<details><summary>🔑 الحل</summary><pre>if (temperature &gt; 30) {
+  console.log("الجو حر، اشرب ميه 🥤");
+} else {
+  console.log("الجو جميل، يلا نلعب ⚽");
+}</pre></details>
+<button class="done">خلصت التحدي ⭐</button></div>
+<div class="proj"><b>🛠️ مشروع الفصل: مصحح الدرجات</b>
+<p>جديد: <code>else if</code> لما يبقى عندنا أكتر من اختيارين.</p>
+<div class="ed"><textarea rows="11">let score = 85;
+if (score >= 90) {
+  console.log('ممتاز 🏆');
+} else if (score >= 75) {
+  console.log('جيد جداً 🥇');
+} else if (score >= 50) {
+  console.log('ناجح 👍');
+} else {
+  console.log('حاول تاني 💪');
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+🎯 مهمتك: جرّب درجات مختلفة (95، 60، 20)، وزوّد تقدير "جيد" بين 65 و 75.<br><button class="done">خلصت المشروع ⭐</button></div>
+</section>
+
+<section id="c5">
+<h2><i>5</i>التكرار (الحلقات for)</h2>
+<p>الكمبيوتر مبيزهقش! بدل ما نكتب نفس السطر ١٠ مرات، بنقوله كرره. الحلقة <code>for</code> بتعد من رقم لرقم:</p>
+<div class="ed"><textarea rows="5">for (let i = 1; i &lt;= 5; i++) {
+  console.log("🌟".repeat(i));
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p>شايف المثلث؟ كل مرة النجوم بتزيد واحدة. وتعالى نرسم دواير ملونة:</p>
+<div class="ed"><textarea rows="5">let colors = ["tomato", "gold", "mediumseagreen", "deepskyblue"];
+for (let i = 0; i &lt; 4; i++) {
+  circle(colors[i], 20 + i * 15);
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<h3>🎡 باقي أنواع الحلقات</h3>
+<p><b>1) while:</b> بتكرر <u>طول ما الشرط صح</u>. مناسبة لما منعرفش هنكرر كام مرة.</p>
+<div class="ed"><textarea rows="6">let n = 3;
+while (n > 0) {
+  console.log('العد التنازلي: ' + n);
+  n--;
+}
+console.log('انطلق! 🚀');</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<div class="tip">⚠️ لو نسيت <code>n--</code> الحلقة مش هتقف أبداً! دايماً خلّي الشرط يبقى غلط في الآخر.</div>
+<p><b>2) do...while:</b> بتنفذ <u>الأول</u> وبعدين تسأل. يعني بتشتغل مرة على الأقل.</p>
+<div class="ed"><textarea rows="6">let tries = 0;
+do {
+  tries++;
+  console.log('محاولة رقم ' + tries);
+} while (tries &lt; 3);</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p><b>3) for...of:</b> بتمشي على عناصر <b>مصفوفة</b> (قايمة بين <code>[ ]</code>) واحد واحد.</p>
+<div class="ed"><textarea rows="5">let fruits = ['🍎', '🍌', '🍇'];
+for (let f of fruits) {
+  console.log('باحب ' + f);
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p><b>4) for...in:</b> بتمشي على أسماء خانات <b>كائن</b> (بطاقة بيانات بين <code>{ }</code>).</p>
+<div class="ed"><textarea rows="6">let kid = { name: 'سلمى', age: 9, hobby: 'الرسم' };
+for (let key in kid) {
+  console.log(key + ': ' + kid[key]);
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p><b>5) forEach:</b> طريقة مختصرة للمصفوفات، بتدّي كل عنصر لدالة.</p>
+<div class="ed"><textarea rows="5">let pets = ['🐱', '🐶', '🐰'];
+pets.forEach(function (p, i) {
+  console.log('الحيوان رقم ' + (i + 1) + ': ' + p);
+});</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p><b>6) حلقات متداخلة:</b> حلقة جوه حلقة (الخارجية للصفوف، والداخلية للأعمدة).</p>
+<div class="ed"><textarea rows="7">for (let row = 1; row &lt;= 4; row++) {
+  let line = '';
+  for (let col = 1; col &lt;= 5; col++) {
+    line = line + '🟪';
+  }
+  console.log(line);
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p><b>7) break و continue:</b> <code>continue</code> تتخطى لفة، و<code>break</code> توقف الحلقة.</p>
+<div class="ed"><textarea rows="8">for (let i = 1; i &lt;= 10; i++) {
+  if (i === 3) { continue; }
+  if (i === 7) { break; }
+  console.log('رقم ' + i);
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<div class="ch"><b>🏆 التحدي:</b> ارسم 10 دواير حمرا في سطر واحد.
+<div class="ed"><textarea rows="4">for (let i = 0; i &lt; 3; i++) {
+  circle("red", 25);
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<details><summary>💡 تلميح</summary>غيّر الرقم 3 إلى 10.</details>
+<details><summary>🔑 الحل</summary><pre>for (let i = 0; i &lt; 10; i++) {
+  circle("red", 25);
+}</pre></details>
+<button class="done">خلصت التحدي ⭐</button></div>
+<div class="proj"><b>🛠️ مشروع الفصل: مدينة النجوم</b>
+<div class="ed"><textarea rows="16">// 1) هرم
+for (let i = 1; i &lt;= 4; i++) {
+  console.log('  '.repeat(4 - i) + '⭐'.repeat(i * 2 - 1));
+}
+console.log('');
+// 2) جدول ضرب 3
+for (let i = 1; i &lt;= 5; i++) {
+  console.log('3 × ' + i + ' = ' + 3 * i);
+}
+console.log('');
+// 3) قوس قزح
+let rainbow = ['red', 'orange', 'gold', 'limegreen', 'deepskyblue', 'blueviolet'];
+for (let c of rainbow) {
+  circle(c, 40);
+}</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+🎯 مهمتك: اعمل جدول ضرب 7، وزوّد لون في قوس القزح، وكبّر الهرم لـ 6 صفوف.<br><button class="done">خلصت المشروع ⭐</button></div>
+</section>
+
+<section id="c6">
+<h2><i>6</i>الوصفات السحرية (الدوال function)</h2>
+<p>الدالة زي وصفة كيك: بنكتبها مرة واحدة، وبعدين نطلبها كل ما نحب. الدالة ممكن تاخد مكونات اسمها <b>باراميتر</b>:</p>
+<div class="ed"><textarea rows="8">function sayHi(name) {
+  console.log("أهلاً يا " + name + " 🎉");
+}
+
+sayHi("سلمى");
+sayHi("عمر");
+sayHi("نور");</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p>وفيه دوال بترجّع نتيجة بكلمة <code>return</code>:</p>
+<div class="ed"><textarea rows="7">function double(n) {
+  return n * 2;
+}
+
+console.log(double(4));
+console.log(double(21));</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<p>ودالة بترسم! بنكتبها مرة وتتكرر:</p>
+<div class="ed"><textarea rows="8">function row(color, howMany) {
+  for (let i = 0; i &lt; howMany; i++) {
+    circle(color, 24);
+  }
+  console.log("");
+}
+
+row("tomato", 3);
+row("gold", 5);
+row("mediumseagreen", 7);</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<div class="ch"><b>🏆 التحدي الكبير:</b> اكتب دالة اسمها <code>square</code> بتاخد رقم وترجّع مربعه (الرقم × نفسه). واطبع <code>square(7)</code>.
+<div class="ed"><textarea rows="6">function square(n) {
+  // كمّل هنا
+}
+
+console.log(square(7));</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+<details><summary>💡 تلميح</summary>جوه الدالة اكتب <code>return n * n;</code> والنتيجة المتوقعة 49.</details>
+<details><summary>🔑 الحل</summary><pre>function square(n) {
+  return n * n;
+}</pre></details>
+<button class="done">خلصت التحدي ⭐</button></div>
+<div class="proj"><b>🛠️ مشروع الفصل: مصنع الأشكال</b>
+<p>بنجمع كل حاجة: دوال + حلقات + متغيرات.</p>
+<div class="ed"><textarea rows="18">function row(shape, n) {
+  console.log(shape.repeat(n));
+}
+function triangle(shape, size) {
+  for (let i = 1; i &lt;= size; i++) {
+    row(shape, i);
+  }
+}
+function rectangle(shape, w, h) {
+  for (let i = 0; i &lt; h; i++) {
+    row(shape, w);
+  }
+}
+function area(w, h) {
+  return w * h;
+}
+triangle('🔺', 4);
+console.log('');
+rectangle('🟦', 5, 3);
+console.log('المساحة = ' + area(5, 3));</textarea><button class="run">▶ شغّل</button><div class="out"></div></div>
+🎯 مهمتك: اعمل دالة <code>house</code> بتستخدم <code>triangle</code> و<code>rectangle</code> علشان ترسم بيت، وغيّر الأشكال لإيموجي تحبه.<br><button class="done">خلصت المشروع ⭐</button></div>
+</section>
+
+<section id="exam"><h2>🎓 الاختبار النهائي</h2><p>٨ أسئلة عشوائية من كل الفصول. كل مرة هتاخد أسئلة مختلفة، فجرّب أكتر من مرة!</p><div id="examBox"></div><button id="again" style="background:var(--acc)">🔄 اختبار جديد</button></section>
+
+<section style="text-align:center">
+<h2>🎉 مبروك يا بطل!</h2>
+<p>وصلت لنهاية الجزء الأول: الطباعة، المتغيرات، الحساب، القرارات، التكرار، والدوال. في الجزء الجاي هنتعلم المصفوفات (Arrays) والكائنات (Objects) وبناء ألعاب صغيرة. 🕹️</p>
+<p class="by">✍️ إعداد: ماجده رضا اللبان</p>
+</section>
+</main>
+<script>
+function runCode(ed){
+  var code=ed.querySelector('textarea').value, out=ed.querySelector('.out');
+  out.innerHTML='';
+  var line=function(t){var d=document.createElement('div');d.textContent=t;if(t==='')d.innerHTML='&nbsp;';out.appendChild(d)};
+  var circle=function(c,s){var d=document.createElement('span');d.className='dot';d.style.background=c||'tomato';d.style.width=d.style.height=(s||30)+'px';out.appendChild(d)};
+  var con={log:function(){line(Array.prototype.join.call(arguments,' '))}};
+  try{new Function('console','circle',code)(con,circle)}catch(e){line('😅 فيه غلطة صغيرة: '+e.message)}
+}
+document.querySelectorAll('.run').forEach(function(b){b.addEventListener('click',function(){runCode(b.closest('.ed'))})});
+var n=0;
+document.querySelectorAll('.done').forEach(function(b){b.addEventListener('click',function(){
+  if(b.disabled)return;b.disabled=true;b.textContent='برافو! ⭐ خدت نجمة';rec(b);
+})});
+</script>
+<script>
+var Q={
+1:[['أي أمر بيطبع كلام على الشاشة؟',['<code>print("hi")</code>','<code>console.log("hi")</code>','<code>say hi</code>'],1,'الأمر الصح اسمه console.log.'],
+['إيه اللي هيظهر؟ <code>console.log("5 + 2");</code>',['7','5 + 2','خطأ'],1,'اللي بين التنصيص نص، بيتطبع زي ما هو من غير حساب.'],
+['السطر في الكود بينتهي بإيه؟',['<code>;</code>','<code>.</code>','<code>:</code>'],0,'الفاصلة المنقوطة ; زي النقطة في آخر الجملة.'],
+['فين الغلطة؟ <code>console.log("hi);</code>',['نسيت علامة التنصيص الأخيرة','نسيت كلمة let','مفيش غلطة'],0,'النص لازم يتقفل بتنصيص: "hi".']],
+2:[['الكلمة اللي بنعمل بيها صندوق (متغير) هي؟',['<code>let</code>','<code>box</code>','<code>make</code>'],0,'بنكتب let وبعدها اسم الصندوق.'],
+['إيه اللي هيطبع؟ <code>let x = 3; x = 8; console.log(x);</code>',['3','8','x'],1,'الصندوق اتغير، فبقى فيه 8.'],
+['أي واحد فيهم نص؟',['<code>25</code>','<code>"25"</code>','<code>let</code>'],1,'اللي بين تنصيص يبقى نص.'],
+['إيه اللي هيطبع؟ <code>let a = 2; let b = a + 3; console.log(b);</code>',['2','5','23'],1,'b = 2 + 3 = 5.']],
+3:[['<code>6 * 7</code> بتساوي؟',['42','13','67'],0,'علامة * معناها ضرب.'],
+['إيه اللي هيطبع؟ <code>let a = 10; console.log(a / 2);</code>',['5','20','12'],0,'/ معناها قسمة: 10 ÷ 2 = 5.'],
+['علامة <code>${ }</code> جوه الباك-تيك بتعمل إيه؟',['بتحط قيمة متغير جوه الجملة','بتمسح الكود','بترسم دايرة'],0,'مثلاً: ${name} بتتبدل باسم المتغير.'],
+['إيه اللي هيطبع؟ <code>console.log(10 - 4 * 2);</code>',['12','2','6'],1,'الضرب الأول: 4*2 = 8، وبعدين 10 - 8 = 2.']],
+4:[['إيه اللي هيطبع؟ <code>let n = 7; if (n &gt; 10) { console.log("A"); } else { console.log("B"); }</code>',['A','B','مفيش حاجة'],1,'7 مش أكبر من 10، فبتشتغل else.'],
+['علامة المقارنة "يساوي" هي؟',['<code>=</code>','<code>===</code>','<code>&gt;</code>'],1,'= بتحط قيمة، لكن === بتقارن.'],
+['else بتشتغل إمتى؟',['لما الشرط غلط','لما الشرط صح','دايماً'],0,'لو الشرط صح بيتنفذ if، وإلا بيتنفذ else.']],
+5:[['<code>for (let i = 0; i &lt; 3; i++) { console.log("hi"); }</code> بتطبع hi كام مرة؟',['2','3','4'],1,'i بياخد 0 و 1 و 2، يعني 3 مرات.'],
+['<code>"⭐".repeat(4)</code> بتطلّع؟',['⭐⭐⭐⭐','4','⭐4'],0,'repeat بتكرر النص.'],
+['<code>i++</code> معناها؟',['زوّد i بواحد','صفّر i','اطبع i'],0,'++ يعني زوّد واحد.'],
+['إيه اللي هيطبع؟ <code>for (let i = 1; i &lt;= 3; i++) { console.log(i); }</code>',['1 ثم 2 ثم 3','0 ثم 1 ثم 2','3 ثم 2 ثم 1'],0,'بتبدأ من 1 وتكمل لحد 3.'],
+['أي حلقة بتشتغل مرة واحدة على الأقل حتى لو الشرط غلط؟',['<code>do...while</code>','<code>while</code>','<code>for...of</code>'],0,'do...while بتنفذ الكود الأول وبعدين تفحص الشرط.'],
+['<code>for (let x of ["a","b","c"])</code> بتمر على؟',['كل عنصر في المصفوفة','أرقام من 0 لـ 10','مفاتيح كائن'],0,'for...of بتمشي على عناصر المصفوفة واحد واحد.'],
+['كلمة <code>break</code> جوه حلقة بتعمل إيه؟',['بتوقف الحلقة خالص','بتتخطى لفة واحدة','بتبدأ من الأول'],0,'break = وقف. أما continue فبتتخطى لفة واحدة بس.']],
+6:[['الكلمة اللي بتبدأ بيها الدالة؟',['<code>function</code>','<code>let</code>','<code>if</code>'],0,'function وبعدها اسم الدالة.'],
+['<code>function f(n) { return n + 1; }</code> ثم <code>console.log(f(4));</code> بيطبع؟',['5','4','n + 1'],0,'f(4) بترجّع 4 + 1 = 5.'],
+['الدالة بتشتغل إمتى؟',['لما ننده عليها: <code>f()</code>','أول ما نكتبها','مش بتشتغل'],0,'كتابة الدالة هي الوصفة، والنداء عليها هو الطبخ.'],
+['<code>return</code> بتعمل إيه؟',['بترجّع نتيجة من الدالة','بتكرر الكود','بتقارن رقمين'],0,'return بترجّع القيمة لمكان النداء.']]};
+function addStar(){}
+function quiz(host,list,onDone){
+ var score=0,done=0,res=document.createElement('div');res.className='tip';
+ list.forEach(function(it){
+  var d=document.createElement('div');d.className='q';d.innerHTML='<p><b>'+it[0]+'</b></p>';
+  var ex=document.createElement('div');ex.className='exp';
+  it[1].forEach(function(o,i){var b=document.createElement('button');b.className='opt';b.innerHTML=o;
+   b.onclick=function(){if(d.dataset.a)return;d.dataset.a=1;done++;
+    if(i===it[2]){b.classList.add('ok');score++;ex.textContent='✅ برافو! '+it[3]}
+    else{b.classList.add('no');d.querySelectorAll('.opt')[it[2]].classList.add('ok');ex.textContent='❌ مش دي. '+it[3]}
+    if(done===list.length){var ok=score>=Math.ceil(list.length*.75);
+     res.textContent='نتيجتك: '+score+' من '+list.length+(score===list.length?' 🏆 ممتاز!':ok?' 👏 حلو قوي!':' 💪 راجع الفصل وجرب تاني');
+     if(window.qEnd)qEnd(host,score,list.length);if(ok&&onDone)onDone()}};
+   d.appendChild(b)});
+  d.appendChild(ex);host.appendChild(d)});
+ host.appendChild(res)}
+for(var k in Q){(function(k){var h=document.createElement('div');h.className='quiz';h.innerHTML='<b>📝 اختبار سريع (احصل على 75% تاخد نجمة)</b>';
+ document.getElementById('c'+k).appendChild(h);quiz(h,Q[k],addStar);var pj=document.getElementById('c'+k).querySelector('.proj');if(pj)pj.parentNode.appendChild(pj)})(k)}
+function exam(){var box=document.getElementById('examBox');box.innerHTML='';
+ var pool=[];for(var k in Q)pool=pool.concat(Q[k]);
+ pool.sort(function(){return Math.random()-.5});quiz(box,pool.slice(0,8))}
+document.getElementById('again').onclick=exam;exam();
+</script>
+<script>
+var S={name:'',prog:{},sol:{}},db=null,uid=null,saveT=null;
+function pts(){var t=0;for(var k in S.prog){var v=S.prog[k],c=k[0];if(c==='c')t+=10;else if(c==='p')t+=15;else if(c==='q')t+=3*v;else if(c==='x')t+=2*v}return t}
+function qOk(i){var v=S.prog['q'+i];return v!==undefined&&v>=Math.ceil(Q[i].length*.75)}
+function starsN(){var n=0;for(var i=1;i<=6;i++){if(S.prog['c'+i]!==undefined)n++;if(S.prog['p'+i]!==undefined)n++;if(qOk(i))n++}return n}
+function rec(b){var s=b.closest('section');if(!s)return;var i=s.id.slice(1),t=b.closest('.proj')?'p':'c',ta=b.parentNode.querySelector('textarea');S.prog[t+i]=1;S.sol[t+i]=ta?ta.value.slice(0,3000):'';changed()}
+function qEnd(host,score,len){var s=host.closest('section');if(!s)return;var k=s.id==='exam'?'x':'q'+s.id.slice(1);if(S.prog[k]===undefined||score>S.prog[k])S.prog[k]=score;changed()}
+function changed(){render();if(db&&uid&&S.name){clearTimeout(saveT);saveT=setTimeout(save,700)}}
+function save(){var d={name:S.name,points:pts(),stars:starsN(),prog:S.prog,sol:S.sol,ts:Date.now()};
+ db.doc('students/'+uid).set(d).catch(function(){});
+ db.doc('data/users/'+uid+'/state').set({name:S.name,prog:S.prog,sol:S.sol}).catch(function(){})}
+function render(){document.getElementById('stars').textContent=starsN();if(!S.name)return;
+ document.getElementById('me').hidden=false;var m=document.getElementById('meBox');m.textContent='';
+ var p=pts(),lv=p<20?'مبتدئ 🌱':p<60?'مستكشف 🔍':p<120?'مبرمج صغير 💻':'بطل البرمجة 🏆';
+ var h=document.createElement('p');h.textContent='الاسم: '+S.name+' — النقاط: '+p+' — المستوى: '+lv;m.appendChild(h);
+ [['c','التحديات'],['q','الاختبارات'],['p','المشاريع']].forEach(function(r){var d=document.createElement('div'),s=r[1]+': ';
+  for(var i=1;i<=6;i++){var ok=r[0]==='q'?qOk(i):S.prog[r[0]+i]!==undefined;s+=ok?'✅':'⬜'}d.textContent=s;m.appendChild(d)});
+ var e=S.prog.x;if(e!==undefined){var d2=document.createElement('div');d2.textContent='الاختبار النهائي: أفضل نتيجة '+e+' من 8';m.appendChild(d2)}}
+function markDone(){for(var k in S.prog){var t=k[0];if(t!=='c'&&t!=='p')continue;var s=document.getElementById('c'+k.slice(1)),b=s&&s.querySelector(t==='c'?'.ch .done':'.proj .done');
+ if(b){b.disabled=true;b.textContent='تم ✅';var ta=b.parentNode.querySelector('textarea');if(ta&&S.sol[k])ta.value=S.sol[k]}}}
+function note(t){var n=document.getElementById('note');n.textContent=t;n.hidden=false}
+function teacherView(){document.getElementById('teacher').hidden=false;var box=document.getElementById('tBox');
+ db.collection('students').onSnapshot(function(sn){box.textContent='';
+  if(sn.empty){box.textContent='لا يوجد طلاب مسجّلون بعد.';return}
+  var arr=sn.docs.map(function(d){return d.data()}).sort(function(a,b){return (b.points||0)-(a.points||0)});
+  arr.forEach(function(v,i){var det=document.createElement('details'),sm=document.createElement('summary');
+   sm.textContent=(i+1)+'. '+(v.name||'بدون اسم')+' — '+(v.points||0)+' نقطة — '+(v.stars||0)+' ⭐';det.appendChild(sm);
+   var sol=v.sol||{},ks=Object.keys(sol).sort(),pr=v.prog||{};
+   if(!ks.length)det.appendChild(document.createTextNode('لم يسلّم حلولًا بعد.'));
+   ks.forEach(function(k){var h=document.createElement('b'),pre=document.createElement('pre');h.textContent=(k[0]==='c'?'حل التحدي ':'حل المشروع ')+k.slice(1);pre.textContent=sol[k];det.appendChild(h);det.appendChild(pre)});
+   var q=document.createElement('p');q.textContent='نتائج الاختبارات: '+[1,2,3,4,5,6].map(function(i){return pr['q'+i]===undefined?'–':pr['q'+i]}).join(' | ')+' — النهائي: '+(pr.x===undefined?'–':pr.x);det.appendChild(q);
+   box.appendChild(det)})},function(){box.textContent='تعذّر تحميل البيانات.'})}
+document.getElementById('go').onclick=function(){var v=document.getElementById('nm').value.trim();if(!v)return;S.name=v.slice(0,30);document.getElementById('gate').style.display='none';render();markDone();changed()};
+document.getElementById('nm').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('go').click()});
+(async function(){
+ try{var user=await claude.use('user'),d=await claude.use('db');
+  if(!user||!d){note('ℹ️ حفظ النقاط غير متاح الآن. يمكنك التعلّم بشكل عادي، لكن لن تُحفَظ نقاطك.');return}
+  db=d;uid=await user.id();
+  if(await user.isOwner()){note('👩‍🏫 أنتِ صاحبة الصفحة. للدخول إلى لوحة المعلمة افتحي نفس الرابط وأضيفي #teacher في آخره.');var tOn=false;function sync(){var t=location.hash==='#teacher';document.body.classList.toggle('tv',t);if(t&&!tOn){tOn=true;teacherView()}}addEventListener('hashchange',sync);sync();return}
+  if(!uid){note('ℹ️ سجّل الدخول لتُحفَظ نقاطك.');return}
+  var sn=await db.doc('data/users/'+uid+'/state').get();
+  if(sn.exists){var v=sn.data();S.name=v.name||'';S.prog=v.prog||{};S.sol=v.sol||{}}
+  if(S.name){render();markDone()}else document.getElementById('gate').style.display='grid'
+ }catch(e){note('ℹ️ تعذّر الاتصال بحفظ النقاط، وسنكمل بدونه.')}
+})();
+</script>
+</body>
+</html>
